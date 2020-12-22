@@ -12,8 +12,10 @@ import org.mongodb.scala.model.Filters.equal
 
 /** Initialize a dao for a connection to the db
   *
-  * @param mongoClient a client for initialization, if you dont have one you can 
-  * just do val dao = WOWServerDAO(MongoClient())
+  * @param mongoClient a client for initialization
+  * {{{
+  * val dao = WOWServerDAO(MongoClient())
+  * }}}
   */
 class WOWServerDAO(mongoClient: MongoClient) {
   val codecRegistry = fromRegistries(
@@ -34,18 +36,12 @@ class WOWServerDAO(mongoClient: MongoClient) {
   /** get all servers we have collected */
   def getAll(): Seq[WOWServer] = getResults(collection.find())
 
-  /** find one server given its @param name */
+  /** find one server given its name*/
   def getByName(name: String): Seq[WOWServer] = {
       getResults(collection.find(equal("name", name)))
   }
 
-  /** Creates and inserts a WOWServer object into the db
-    *
-    * @param status whether the server is up or down
-    * @param population how populated the server is
-    * @param name the actual name of the server
-    * @param serverId the id of the server used in api calls
-    */
+  /** Creates and inserts a WOWServer object into the db */
   def createOne(status: String, population: String, name: String, serverId: Int) {
     getResults(collection.insertOne(WOWServer(status, population, name, serverId)))
   }
