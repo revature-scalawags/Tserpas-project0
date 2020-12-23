@@ -9,6 +9,7 @@ import scala.concurrent.Await
 import org.mongodb.scala.Observable
 import scala.concurrent.duration.{Duration, SECONDS}
 import org.mongodb.scala.model.Filters.equal
+import com.typesafe.scalalogging.LazyLogging
 
 /** Initialize a dao for a connection to the db
   *
@@ -17,7 +18,7 @@ import org.mongodb.scala.model.Filters.equal
   * val dao = WOWServerDAO(MongoClient())
   * }}}
   */
-class WOWServerDAO(mongoClient: MongoClient) {
+class WOWServerDAO(mongoClient: MongoClient) extends LazyLogging {
   val codecRegistry = fromRegistries(
     fromProviders(classOf[WOWServer]),
     MongoClient.DEFAULT_CODEC_REGISTRY
