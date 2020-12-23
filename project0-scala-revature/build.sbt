@@ -8,7 +8,7 @@ ThisBuild / organizationName := "example"
 lazy val root = (project in file("."))
   .settings(
     name := "project0-scala-revature",
-    libraryDependencies ++= Seq(scalaTest % Test, play, mongoDriver, scalaj)
+    libraryDependencies ++= Seq(scalaTest % Test, play, mongoDriver, scalaj, scalaLogging, logback)
   )
 
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
